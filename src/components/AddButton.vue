@@ -1,15 +1,15 @@
 <template>
-  <div @click="onBtnClick" class="btn">ADD NEW +</div>
+  <div class="btn">ADD NEW +</div>
 </template>
 
 <script>
 export default {
   name: "AddButton",
-  methods: {
-    onBtnClick() {
-      this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
-    },
-  },
+  // methods: {
+  //   onBtnClick() {
+  //     this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
+  //   },
+  // },
 };
 </script>
 

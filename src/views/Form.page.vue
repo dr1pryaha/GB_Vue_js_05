@@ -1,6 +1,8 @@
 <template>
-  <div class="form" v-if="isPopupActive">
-    <div @click="closeBtnClick" class="closeModal"></div>
+  <div class="form">
+    <router-link :to="-1" replace
+      ><div @click="$router.go(-1)" class="closeModal"></div
+    ></router-link>
     <input
       v-model="category"
       :class="{ error: !this.category }"
@@ -32,23 +34,30 @@
 <script>
 export default {
   name: "Form",
-
+  props: {
+    to: Number,
+  },
   data() {
+    console.log(this.$route.params.category);
     return {
-      category: "",
-      value: "",
-      date: "",
+      category: this.$route.params.category,
+      value: this.$route.query.value,
+      date: new Date().toLocaleDateString(),
       error: false,
     };
   },
 
   methods: {
     // closeBtnClick() {
+
     //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
     // },
 
     submitData() {
       if (this.category && this.date && this.value) {
+        // this.category = this.$route.params.category;
+        // this.date = new Date();
+        // this.value = this.$route.params.value;
         this.$store.commit("addCostsList", {
           id: this.$store.getters.getMaxId + 1,
           date: this.date,

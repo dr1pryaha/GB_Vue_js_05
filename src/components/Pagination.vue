@@ -31,6 +31,11 @@
         :aria-label="`Go to page number ${page.name}`"
       >
         {{ page.name }}
+        <!-- <router-link
+          class="pagination__link"
+          :to="{ path: '/', query: { page: page } }"
+        >
+        </router-link> -->
       </button>
     </li>
 
@@ -72,6 +77,10 @@ export default {
       required: false,
       default: 3,
     },
+    // url: {
+    //   type: String,
+    //   required: true,
+    // },
   },
 
   computed: {
@@ -123,7 +132,14 @@ export default {
       );
     },
     onClickPage(page) {
-      this.$store.commit("setCurrentPage", page);
+      this.$router.push(`${this.$route.path}?page=${page}`).catch(error => {
+        if (!isNavigationFailure(error, NavigationFailureType.duplicated)) {
+          throw Error(error);
+        }
+      });
+      // +this.$route.query.page ||
+      console.log(this.$store.getters.getCurrentPage);
+      this.$store.commit("setCurrentPage", +this.$route.query.page);
     },
     onClickNextPage() {
       this.$store.commit(
