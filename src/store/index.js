@@ -9,11 +9,8 @@ export default new Vuex.Store({
     costsData: [],
     currentPage: 1,
     perPage: 5,
-    category: "",
-    value: "",
-    date: "",
     error: false,
-    isPopupActive: false,
+    // isPopupActive: false, +this.$route.query.page ||
   },
 
   // для вычисления производного состояния на основе состояния хранилища
@@ -32,7 +29,7 @@ export default new Vuex.Store({
         end = start + state.perPage;
       return state.costsData.slice(start, end);
     },
-    getIsPopupActive: state => state.isPopupActive,
+    // getIsPopupActive: state => state.isPopupActive,
     getCurrentPage: state => state.currentPage,
     getMaxId: state =>
       state.costsData.map(({ id }) => id).sort((a, b) => a - b)[
@@ -45,7 +42,7 @@ export default new Vuex.Store({
     setCostsList: (state, payload) => (state.costsData = payload),
     addCostsList: (state, payload) => state.costsData.push(payload),
     setCurrentPage: (state, payload) => (state.currentPage = payload),
-    setIsPopupActive: (state, payload) => (state.isPopupActive = payload),
+    // setIsPopupActive: (state, payload) => (state.isPopupActive = payload),
   },
 
   // для обмена данными между клиентом-сервером (асинхронных операций)

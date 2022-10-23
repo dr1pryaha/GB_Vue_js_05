@@ -7,7 +7,10 @@
       <span>Value</span>
     </div>
     <li v-for="cost in list" :key="cost.id" class="costs-list__item">
-      <span v-for="(item, idx) in cost" :key="idx" class="row">{{ item }}</span>
+      <span v-for="(item, idx) in cost" :key="idx" class="row">{{ item }} </span
+      ><router-link class="context-menu" to="/add/payment"
+        ><span @click="callContextMenu">&#10247;</span></router-link
+      >
     </li>
   </ul>
 
@@ -60,6 +63,10 @@ export default {
       return this.$store.getters.getPaginatedData;
     },
   },
+
+  methods: {
+    callContextMenu() {},
+  },
 };
 </script>
 
@@ -97,5 +104,10 @@ export default {
   flex-basis: 25%;
   padding: 8px 16px;
   text-align: center;
+}
+
+.context-menu {
+  cursor: pointer;
+  text-decoration: none;
 }
 </style>
